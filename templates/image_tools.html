@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Image Studio{% endblock %}
+{% block content %}
+<section class="section-head">
+  <p class="eyebrow">Module 3</p>
+  <h1>Image Studio</h1>
+  <p>Upload, process, compare, download, and extract dominant palettes with KMeans.</p>
+</section>
+<section class="studio-layout">
+  <form class="panel controls" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <h2>Image Controls</h2>
+    <label>Upload Image<input type="file" name="image" accept="image/png,image/jpeg,image/webp" required></label>
+    <label>Filter<select name="filter">
+      {% for value,label in [('none','None'),('grayscale','Grayscale'),('sepia','Sepia'),('negative','Negative'),('blur','Blur'),('gaussian_blur','Gaussian Blur'),('sharpen','Sharpen'),('emboss','Emboss'),('edge','Edge Detection'),('cartoon','Cartoon'),('sketch','Sketch'),('watercolor','Watercolor'),('pixelation','Pixelation'),('neon','Neon'),('vintage','Vintage'),('glitch','Glitch')] %}
+      <option value="{{ value }}">{{ label }}</option>
+      {% endfor %}
+    </select></label>
+    <label>Transform<select name="transform"><option value="none">None</option><option value="mirror">Mirror</option><option value="flip">Flip</option><option value="rotate_left">Rotate Left</option><option value="rotate_right">Rotate Right</option></select></label>
+    <label>Brightness<input type="range" name="brightness" min="0.2" max="2" step="0.01" value="1"></label>
+    <label>Contrast<input type="range" name="contrast" min="0.2" max="2" step="0.01" value="1"></label>
+    <label>Saturation<input type="range" name="saturation" min="0" max="2.5" step="0.01" value="1"></label>
+    <label>Hue<input type="range" name="hue" min="-127" max="127" value="0"></label>
+    <button class="button" type="submit">Process Image</button>
+  </form>
+  <div class="comparison">
+    <div class="image-preview glass">{% if original %}<img src="{{ url_for('static', filename='uploads/' ~ original) }}" alt="Original image">{% else %}<div class="empty-state">Original</div>{% endif %}</div>
+    <div class="image-preview glass">{% if processed %}<img src="{{ url_for('static', filename='generated/' ~ processed) }}" alt="Processed image"><a class="button" href="{{ url_for('download', filename=processed) }}">Download Image</a>{% else %}<div class="empty-state">Processed</div>{% endif %}</div>
+    {% if colors %}
+      <div class="panel palette-panel"><h2>Dominant Palette</h2><div class="swatches">{% for color in colors %}<span style="background: {{ color }}" title="{{ color }}"></span>{% endfor %}</div></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+.controls {
+  position: sticky;
+  top: 112px;
+  display: grid;
+  gap: 15px;
+}
+
+.controls label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+input, select {
+  width: 100%;
+  min-height: 43px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(6, 9, 22, 0.68);
+  color: var(--text);
+  outline: none;
+}
+
+input[type="range"] {
+  padding: 0;
+  accent-color: var(--pink);
+}
+
+input[type="file"] {
+  padding: 9px;
+}
+
+.check {
+  grid-template-columns: 20px 1fr;
+  align-items: center;
+}
+
+.check input { width: 18px; min-height: 18px; accent-color: var(--purple); }
+
+@media (max-width: 900px) {
+  .controls { position: static; }
+}

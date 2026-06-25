@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Runtime-generated files
+static/generated/*
+!static/generated/.gitkeep
+
+static/uploads/*
+!static/uploads/.gitkeep
+
+static/downloads/*
+!static/downloads/.gitkeep

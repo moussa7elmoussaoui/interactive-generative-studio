@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Gallery{% endblock %}
+{% block content %}
+<section class="section-head">
+  <p class="eyebrow">Saved work</p>
+  <h1>Gallery</h1>
+  <p>Generated artwork is saved automatically with search, filtering, pagination, downloads, and deletion.</p>
+</section>
+<form class="gallery-tools glass" method="get">
+  <input name="q" placeholder="Search gallery" value="{{ query }}">
+  <select name="module">
+    <option value="">All Modules</option>
+    {% for name in ['Generative Art','Data Visualization','Image Studio'] %}
+      <option value="{{ name }}" {% if module_filter == name %}selected{% endif %}>{{ name }}</option>
+    {% endfor %}
+  </select>
+  <button class="button" type="submit">Filter</button>
+</form>
+<section class="gallery-grid">
+  {% for item in items %}
+    <article class="gallery-card glass">
+      <img src="{{ url_for('static', filename='generated/' ~ item.filename) }}" alt="{{ item.title }}">
+      <div>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.module }} · {{ item.created_at }}</p>
+        <div class="button-row">
+          <a class="button secondary" href="{{ url_for('download', filename=item.filename) }}">Download</a>
+          <form method="post" action="{{ url_for('delete_gallery', filename=item.filename) }}"><button class="button danger" type="submit">Delete</button></form>
+        </div>
+      </div>
+    </article>
+  {% else %}
+    <div class="empty-state">No gallery items match the current filter.</div>
+  {% endfor %}
+</section>
+<div class="pagination">
+  {% if page > 1 %}<a class="button secondary" href="{{ url_for('gallery', page=page-1, q=query, module=module_filter) }}">Previous</a>{% endif %}
+  <span>Page {{ page }} of {{ total_pages }}</span>
+  {% if page < total_pages %}<a class="button secondary" href="{{ url_for('gallery', page=page+1, q=query, module=module_filter) }}">Next</a>{% endif %}
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>{% endblock %}

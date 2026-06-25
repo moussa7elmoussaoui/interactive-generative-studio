@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Interactive Generative Studio{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Creative coding dashboard</p>
+    <h1>Interactive Generative Studio</h1>
+    <p class="subtitle">A polished Flask studio for drawing procedural art, transforming images, and turning CSV data into expressive visual systems.</p>
+    <div class="actions">
+      <a class="button" href="{{ url_for('generative') }}">Explore Studio</a>
+      <a class="button secondary" href="{{ url_for('generative') }}#random">Create Art</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <canvas id="heroCanvas" width="520" height="420"></canvas>
+  </div>
+</section>
+
+<section class="stats">
+  <div><strong data-count="{{ stats.artworks }}">0</strong><span>Saved artworks</span></div>
+  <div><strong data-count="{{ stats.palettes }}">0</strong><span>Color palettes</span></div>
+  <div><strong data-count="{{ stats.filters }}">0</strong><span>Image effects</span></div>
+  <div><strong data-count="{{ stats.datasets }}">0</strong><span>Datasets</span></div>
+</section>
+
+<section class="grid feature-grid">
+  <article class="card"><h2>Random Geometry</h2><p>Generate layered circles, squares, triangles, and lines with seed control and editable Canvas objects.</p></article>
+  <article class="card"><h2>Particle System</h2><p>Animate connected particles with mouse attraction, repulsion, gravity, velocity, and trail controls.</p></article>
+  <article class="card"><h2>Recursive Fractals</h2><p>Create glowing recursive trees with depth, branch randomness, angle, palette, and line thickness controls.</p></article>
+  <article class="card"><h2>Data Art</h2><p>Use Pandas-cleaned CSV data to build landscapes, circular bars, heatmaps, bubbles, and ribbon plots.</p></article>
+  <article class="card"><h2>Image Studio</h2><p>Upload PNG, JPEG, or WEBP files and apply custom Pillow/OpenCV transformations and artistic filters.</p></article>
+  <article class="card"><h2>Gallery</h2><p>Every generated file is automatically indexed with search, filters, pagination, downloads, and deletion.</p></article>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/canvas.js') }}"></script>{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Generative Art{% endblock %}
+{% block content %}
+<section class="section-head">
+  <p class="eyebrow">Module 1</p>
+  <h1>Generative Art Collection</h1>
+  <p>Three different engines: object-oriented random geometry, an animated particle system, and a recursive fractal tree.</p>
+</section>
+
+<section id="random" class="studio-layout">
+  <form class="panel controls" id="randomForm">
+    <h2>Random Geometry</h2>
+    <label>Palette<select name="palette">{% for name in palettes %}<option value="{{ name }}">{{ name|title }}</option>{% endfor %}</select></label>
+    <label>Shape Count<input type="range" name="shape_count" min="8" max="260" value="90"></label>
+    <label>Maximum Size<input type="range" name="max_size" min="20" max="260" value="120"></label>
+    <label>Transparency<input type="range" name="alpha" min="0.1" max="1" step="0.01" value="0.72"></label>
+    <label>Random Seed<input name="seed" type="number" placeholder="Optional"></label>
+    <div class="button-row">
+      <button class="button" type="submit">Generate</button>
+      <button class="button secondary" type="button" id="resetGeometry">Reset</button>
+      <a class="button secondary" id="downloadGeometry" href="#" download>Download PNG</a>
+    </div>
+    <div class="swatches" id="extractedSwatches"></div>
+  </form>
+  <div class="canvas-panel glass">
+    <canvas id="geometryCanvas" width="1200" height="760"></canvas>
+  </div>
+</section>
+
+<section class="studio-layout">
+  <form class="panel controls" id="particleForm">
+    <h2>Particle System</h2>
+    <label>Palette<select name="palette">{% for name in palettes %}<option value="{{ name }}">{{ name|title }}</option>{% endfor %}</select></label>
+    <label>Particle Count<input id="particleCount" type="range" min="20" max="220" value="80" name="particle_count"></label>
+    <label>Speed<input id="particleSpeed" type="range" min="0.2" max="4" step="0.1" value="1.4"></label>
+    <label>Gravity<input id="particleGravity" type="range" min="-0.08" max="0.08" step="0.005" value="0"></label>
+    <label>Trail Length<input id="trailLength" type="range" min="0.05" max="0.45" step="0.01" value="0.16"></label>
+    <label>Mode<select id="particleMode"><option value="repel">Repulsion</option><option value="attract">Attraction</option></select></label>
+    <div class="button-row">
+      <button class="button" type="button" id="startParticles">Animation On</button>
+      <button class="button secondary" type="button" id="pauseParticles">Pause</button>
+      <button class="button secondary" type="button" id="resumeParticles">Resume</button>
+      <button class="button secondary" type="button" id="resetParticles">Reset</button>
+      <button class="button secondary" type="submit">Save</button>
+    </div>
+  </form>
+  <div class="canvas-panel glass">
+    <canvas id="particleCanvas" width="1200" height="760"></canvas>
+  </div>
+</section>
+
+<section class="studio-layout">
+  <form class="panel controls" id="fractalForm">
+    <h2>Recursive Fractal</h2>
+    <label>Palette<select name="palette">{% for name in palettes %}<option value="{{ name }}">{{ name|title }}</option>{% endfor %}</select></label>
+    <label>Depth<input type="range" name="depth" min="2" max="13" value="9"></label>
+    <label>Angle<input type="range" name="angle" min="5" max="55" value="24"></label>
+    <label>Length<input type="range" name="length" min="40" max="260" value="150"></label>
+    <label>Branch Randomness<input type="range" name="randomness" min="0" max="0.7" step="0.01" value="0.18"></label>
+    <label>Line Thickness<input type="range" name="thickness" min="1" max="18" value="8"></label>
+    <div class="button-row">
+      <button class="button" type="submit">Randomize</button>
+      <a class="button secondary" id="downloadFractal" href="#" download>Save</a>
+    </div>
+  </form>
+  <div class="image-preview glass">
+    <div class="empty-state" id="fractalEmpty">Generate a fractal to preview it.</div>
+    <img id="fractalPreview" class="hidden" alt="Generated fractal preview">
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/canvas.js') }}"></script>{% endblock %}

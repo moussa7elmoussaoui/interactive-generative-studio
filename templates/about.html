@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<section class="panel narrow">
+
+    <p class="eyebrow">About</p>
+
+    <h1>Interactive Generative Studio</h1>
+
+    <p>
+        Interactive Generative Studio is a university term project that demonstrates
+        full-stack Flask development, creative coding, object-oriented programming,
+        image processing, artistic data visualization, and responsive web design.
+    </p>
+
+    <p>
+        The application is built using Python 3.12, Flask, Jinja2, Pillow,
+        OpenCV, Pandas, NumPy, Matplotlib, Scikit-learn, Flask-WTF,
+        HTML5, CSS3, Vanilla JavaScript, and the Canvas API.
+    </p>
+
+    <p>
+        Users can generate procedural artwork, transform images, create artistic
+        visualizations from datasets, and browse all generated creations through
+        an interactive gallery.
+    </p>
+
+    <hr style="margin: 2.5rem 0;">
+
+    <h2 style="margin-bottom: 1.5rem;">Project Team</h2>
+
+    <div class="team-grid">
+
+        <div class="team-card">
+            <h3>Moussa El Moussaoui</h3>
+            <p class="role">Frontend & Flask Development</p>
+            <p>
+                Contributed to the user interface, Flask template integration,
+                responsive layouts, and implementation of interactive features.
+            </p>
+        </div>
+
+        <div class="team-card">
+            <h3>Mouad Agzennai Bakhouch</h3>
+            <p class="role">Backend Development</p>
+            <p>
+                Contributed to backend development, Flask routing,
+                application logic, and integration between project modules.
+            </p>
+        </div>
+
+        <div class="team-card">
+            <h3>Mohammed Lachhab</h3>
+            <p class="role">Image Processing & Data Visualization</p>
+            <p>
+                Contributed to image processing tools, artistic data
+                visualizations, and media processing features.
+            </p>
+        </div>
+
+        <div class="team-card">
+            <h3>Aimad Eddine Slimani</h3>
+            <p class="role">Generative Art & Quality Assurance</p>
+            <p>
+                Contributed to procedural artwork generation, application
+                testing, debugging, and user experience improvements.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<style>
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+    margin-top:1.5rem;
+}
+
+.team-card{
+    padding:1.5rem;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    transition:.25s ease;
+}
+
+.team-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+.team-card h3{
+    margin:0 0 .5rem;
+    font-size:1.25rem;
+}
+
+.role{
+    margin-bottom:.9rem;
+    font-weight:600;
+    color:#7aa7ff;
+}
+
+.team-card p{
+    line-height:1.6;
+    margin:0;
+}
+
+@media (max-width: 768px){
+
+    .team-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+{% endblock %}
